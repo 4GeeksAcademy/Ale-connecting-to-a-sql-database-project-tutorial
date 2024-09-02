@@ -1,0 +1,569 @@
+  he intentado durante las pasadas 3 semanas a hacer que este codigo funcione. no esta siendo posible. tambien las soluciones me dan error. 
+  
+  
+  
+    1  #!/bin/bash -i
+    2  set -e
+    3  source ./library_scripts.sh
+    4  # nanolayer is a cli utility which keeps container layers as small as possible
+    5  # source code: https://github.com/devcontainers-contrib/nanolayer
+    6  # `ensure_nanolayer` is a bash function that will find any existing nanolayer installations, 
+    7  # and if missing - will download a temporary copy that automatically get deleted at the end 
+    8  # of the script
+    9  ensure_nanolayer nanolayer_location "v0.4.45"
+   10  $nanolayer_location     install     devcontainer-feature     "ghcr.io/devcontainers-contrib/features/apt-get-packages:1.0.4"     --option packages='build-essential,libssl-dev,libreadline-dev,zlib1g-dev,libcurl4-openssl-dev,uuid-dev,icu-devtools'
+   11      
+   12  $nanolayer_location     install     devcontainer-feature     "ghcr.io/devcontainers-contrib/features/asdf-package:1.0.5"     --option plugin='postgres' --option version="$VERSION"
+   13      
+   14  echo 'Done!'
+   15  psql --version
+   16  createdb -h localhost -U gitpod bbdd_libros
+   17  createdb -h localhost -U <"gitpod"> <"sample-db">
+   18  createdb -h localhost -U <'gitpod'> <'sample-db'>
+   19  psql --version
+   20  $ createdb -h localhost -U <gitpod> <sample-db>
+   21  createdb -h localhost -U gitpod sample-db
+   22  psql -h localhost -U gitpod sample-db
+   23  createdb -h localhost -U gitpod sample-db
+   24  psql -h localhost -U gitpod sample-db
+   25  pip install psycopg2
+   26  pip install -r requirements.txt
+   27  history > terminal_history.txt
+
+
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ /usr/local/bin/python /workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py
+Traceback (most recent call last):
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 3, in <module>
+    import pandas as pd
+  File "/root/.local/lib/python3.10/site-packages/pandas/__init__.py", line 22, in <module>
+    from pandas.compat import is_numpy_dev as _is_numpy_dev
+  File "/root/.local/lib/python3.10/site-packages/pandas/compat/__init__.py", line 15, in <module>
+    from pandas.compat.numpy import (
+  File "/root/.local/lib/python3.10/site-packages/pandas/compat/numpy/__init__.py", line 4, in <module>
+    from pandas.util.version import Version
+  File "/root/.local/lib/python3.10/site-packages/pandas/util/__init__.py", line 1, in <module>
+    from pandas.util._decorators import (  # noqa:F401
+  File "/root/.local/lib/python3.10/site-packages/pandas/util/_decorators.py", line 14, in <module>
+    from pandas._libs.properties import cache_readonly  # noqa:F401
+  File "/root/.local/lib/python3.10/site-packages/pandas/_libs/__init__.py", line 13, in <module>
+    from pandas._libs.interval import Interval
+  File "pandas/_libs/interval.pyx", line 1, in init pandas._libs.interval
+ValueError: numpy.dtype size changed, may indicate binary incompatibility. Expected 96 from C header, got 88 from PyObject
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ pip uninstall numpy pandas -y
+Found existing installation: numpy 2.0.1
+Uninstalling numpy-2.0.1:
+  Successfully uninstalled numpy-2.0.1
+Found existing installation: pandas 1.4.2
+Uninstalling pandas-1.4.2:
+  Successfully uninstalled pandas-1.4.2
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ pip install numpy pandas
+Collecting numpy
+  Downloading numpy-2.1.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.3/16.3 MB 43.3 MB/s eta 0:00:00
+Collecting pandas
+  Downloading pandas-2.2.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.0/13.0 MB 55.8 MB/s eta 0:00:00
+Requirement already satisfied: python-dateutil>=2.8.2 in /root/.local/lib/python3.10/site-packages (from pandas) (2.9.0.post0)
+Collecting tzdata>=2022.7
+  Downloading tzdata-2024.1-py2.py3-none-any.whl (345 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 345.4/345.4 kB 14.4 MB/s eta 0:00:00
+Requirement already satisfied: pytz>=2020.1 in /root/.local/lib/python3.10/site-packages (from pandas) (2024.1)
+Requirement already satisfied: six>=1.5 in /root/.local/lib/python3.10/site-packages (from python-dateutil>=2.8.2->pandas) (1.16.0)
+Installing collected packages: tzdata, numpy, pandas
+Successfully installed numpy-2.1.0 pandas-2.2.2 tzdata-2024.1
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+
+[notice] A new release of pip is available: 23.0.1 -> 24.2
+[notice] To update, run: pip install --upgrade pip
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ python src/app.py
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ pip install python-dotenv
+Requirement already satisfied: python-dotenv in /root/.local/lib/python3.10/site-packages (0.20.0)
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+
+[notice] A new release of pip is available: 23.0.1 -> 24.2
+[notice] To update, run: pip install --upgrade pip
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ /usr/local/bin/python /workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py
+Traceback (most recent call last):
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 16, in <module>
+    conn = psycopg2.connect(
+  File "/root/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 3306 failed: Connection refused
+        Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (::1), port 3306 failed: Cannot assign requested address
+        Is the server running on that host and accepting TCP/IP connections?
+
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ nano .env
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ /usr/local/bin/python /workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py
+Traceback (most recent call last):
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 32, in <module>
+    execute_sql_file('./src/sql/create.sql')
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 28, in execute_sql_file
+    cur.execute(file.read())
+psycopg2.errors.DuplicateTable: relation "publishers" already exists
+
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ /usr/local/bin/python /workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py
+Traceback (most recent call last):
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 35, in <module>
+    execute_sql_file('./src/sql/insert.sql')
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 28, in execute_sql_file
+    cur.execute(file.read())
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "publishers_pkey"
+DETAIL:  Key (publisher_id)=(1) already exists.
+
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ /usr/local/bin/python /workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py
+Traceback (most recent call last):
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 35, in <module>
+    execute_sql_file('./src/sql/insert.sql')
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 28, in execute_sql_file
+    cur.execute(file.read())
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "publishers_pkey"
+DETAIL:  Key (publisher_id)=(1) already exists.
+
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ /usr/local/bin/python /workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py
+Starting the connection...
+Traceback (most recent call last):
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3280, in _wrap_pool_connect
+    return fn()
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 310, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 868, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 476, in checkout
+    rec = pool._do_get()
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 208, in raise_
+    raise exception
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 256, in _create_connection
+    return _ConnectionRecord(self)
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 371, in __init__
+    self.__connect()
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 665, in __connect
+    with util.safe_reraise():
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 208, in raise_
+    raise exception
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 661, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 590, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 597, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/root/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 3306 failed: Connection refused
+        Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (::1), port 3306 failed: Cannot assign requested address
+        Is the server running on that host and accepting TCP/IP connections?
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 50, in <module>
+    main()
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 30, in main
+    engine = connect()
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 16, in connect
+    engine.connect()
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3234, in connect
+    return self._connection_cls(self, close_with_result=close_with_result)
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 96, in __init__
+    else engine.raw_connection()
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3313, in raw_connection
+    return self._wrap_pool_connect(self.pool.connect, _connection)
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3283, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2117, in _handle_dbapi_exception_noconnection
+    util.raise_(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 208, in raise_
+    raise exception
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3280, in _wrap_pool_connect
+    return fn()
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 310, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 868, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 476, in checkout
+    rec = pool._do_get()
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 208, in raise_
+    raise exception
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 256, in _create_connection
+    return _ConnectionRecord(self)
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 371, in __init__
+    self.__connect()
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 665, in __connect
+    with util.safe_reraise():
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 208, in raise_
+    raise exception
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 661, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 590, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 597, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/root/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 3306 failed: Connection refused
+        Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (::1), port 3306 failed: Cannot assign requested address
+        Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ /usr/local/bin/python /workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py
+Starting the connection...
+/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py:43: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  df = pd.read_sql('SELECT * FROM publishers', con=engine)
+Traceback (most recent call last):
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 50, in <module>
+    main()
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 43, in main
+    df = pd.read_sql('SELECT * FROM publishers', con=engine)
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 706, in read_sql
+    return pandas_sql.read_query(
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 2738, in read_query
+    cursor = self.execute(sql, params)
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 2672, in execute
+    cur = self.con.cursor()
+AttributeError: 'Engine' object has no attribute 'cursor'
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ /usr/local/bin/python /workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py
+Starting the connection...
+/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py:43: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  df = pd.read_sql('SELECT * FROM publishers', con=engine)
+Traceback (most recent call last):
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 50, in <module>
+    main()
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 43, in main
+    df = pd.read_sql('SELECT * FROM publishers', con=engine)
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 706, in read_sql
+    return pandas_sql.read_query(
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 2738, in read_query
+    cursor = self.execute(sql, params)
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 2672, in execute
+    cur = self.con.cursor()
+AttributeError: 'Engine' object has no attribute 'cursor'
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ /usr/local/bin/python /workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py
+Starting the connection...
+Traceback (most recent call last):
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 50, in <module>
+    main()
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 30, in main
+    engine = connect()
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 15, in connect
+    engine = create_engine(connection_string)
+  File "<string>", line 2, in create_engine
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/util/deprecations.py", line 309, in warned
+    return fn(*args, **kwargs)
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 530, in create_engine
+    u = _url.make_url(url)
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/url.py", line 731, in make_url
+    return _parse_rfc1738_args(name_or_url)
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/url.py", line 787, in _parse_rfc1738_args
+    components["port"] = int(components["port"])
+ValueError: invalid literal for int() with base 10: 'None'
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ /usr/local/bin/python /workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py
+Starting the connection...
+/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py:43: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  df = pd.read_sql('SELECT * FROM publishers', con=engine)
+Traceback (most recent call last):
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 50, in <module>
+    main()
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 43, in main
+    df = pd.read_sql('SELECT * FROM publishers', con=engine)
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 706, in read_sql
+    return pandas_sql.read_query(
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 2738, in read_query
+    cursor = self.execute(sql, params)
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 2672, in execute
+    cur = self.con.cursor()
+AttributeError: 'Engine' object has no attribute 'cursor'
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ /usr/local/bin/python /workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py
+Traceback (most recent call last):
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "publishers_pkey"
+DETAIL:  Key (publisher_id)=(1) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 51, in <module>
+    engine.execute("""
+  File "<string>", line 2, in execute
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/util/deprecations.py", line 401, in warned
+    return fn(*args, **kwargs)
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3176, in execute
+    return connection.execute(statement, *multiparams, **params)
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1291, in execute
+    return self._exec_driver_sql(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1595, in _exec_driver_sql
+    ret = self._execute_context(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1862, in _execute_context
+    self._handle_dbapi_exception(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2043, in _handle_dbapi_exception
+    util.raise_(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 208, in raise_
+    raise exception
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "publishers_pkey"
+DETAIL:  Key (publisher_id)=(1) already exists.
+
+[SQL: 
+INSERT INTO publishers(publisher_id, name) VALUES (1, 'Allen & Unwin');
+
+INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES (1, 'John', 'Ronald Reuel', 'Tolkien');
+
+INSERT INTO books (book_id, title, total_pages, rating, isbn, published_date, publisher_id) VALUES (1, 'The Lord of the Rings', 1216, 4.5, '9780261102385', '1954-07-29', 1);
+
+INSERT INTO book_authors (book_id, author_id) VALUES (1, 1);
+]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ 
+.devcontainer/      .env.example        .gitignore          .gitpod.yml         INSTRUCTIONS.es.md  README.es.md        assets/             requirements.txt    
+.env                .git/               .gitpod.Dockerfile  .vscode/            INSTRUCTIONS.md     README.md           learn.json          src/                
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ usr/local/bin/python /workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py
+bash: usr/local/bin/python: No such file or directory
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ /usr/local/bin/python /workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py
+/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py:66: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  result_dataFrame = pd.read_sql("SELECT * FROM publishers;", engine)
+Traceback (most recent call last):
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 66, in <module>
+    result_dataFrame = pd.read_sql("SELECT * FROM publishers;", engine)
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 706, in read_sql
+    return pandas_sql.read_query(
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 2738, in read_query
+    cursor = self.execute(sql, params)
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 2672, in execute
+    cur = self.con.cursor()
+AttributeError: 'OptionEngine' object has no attribute 'cursor'
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ /usr/local/bin/python /workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py
+/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py:66: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  result_dataFrame = pd.read_sql("SELECT * FROM publishers;", con=engine)
+Traceback (most recent call last):
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 66, in <module>
+    result_dataFrame = pd.read_sql("SELECT * FROM publishers;", con=engine)
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 706, in read_sql
+    return pandas_sql.read_query(
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 2738, in read_query
+    cursor = self.execute(sql, params)
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 2672, in execute
+    cur = self.con.cursor()
+AttributeError: 'Engine' object has no attribute 'cursor'
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ /usr/local/bin/python /workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/solution.py
+Traceback (most recent call last):
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.DuplicateTable: relation "publishers" already exists
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/solution.py", line 14, in <module>
+    engine.execute("""
+  File "<string>", line 2, in execute
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/util/deprecations.py", line 401, in warned
+    return fn(*args, **kwargs)
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3176, in execute
+    return connection.execute(statement, *multiparams, **params)
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1291, in execute
+    return self._exec_driver_sql(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1595, in _exec_driver_sql
+    ret = self._execute_context(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1862, in _execute_context
+    self._handle_dbapi_exception(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2043, in _handle_dbapi_exception
+    util.raise_(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 208, in raise_
+    raise exception
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.DuplicateTable) relation "publishers" already exists
+
+[SQL: 
+CREATE TABLE publishers(
+    publisher_id INT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    PRIMARY KEY(publisher_id)
+);
+
+CREATE TABLE authors(
+    author_id INT NOT NULL,
+    first_name VARCHAR(100) NOT NULL,
+    middle_name VARCHAR(50) NULL,
+    last_name VARCHAR(100) NULL,
+    PRIMARY KEY(author_id)
+);
+
+CREATE TABLE books(
+    book_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    total_pages INT NULL,
+    rating DECIMAL(4, 2) NULL,
+    isbn VARCHAR(13) NULL,
+    published_date DATE,
+    publisher_id INT NULL,
+    PRIMARY KEY(book_id),
+    CONSTRAINT fk_publisher FOREIGN KEY(publisher_id) REFERENCES publishers(publisher_id)
+);
+
+CREATE TABLE book_authors (
+    book_id INT NOT NULL,
+    author_id INT NOT NULL,
+    PRIMARY KEY(book_id, author_id),
+    CONSTRAINT fk_book FOREIGN KEY(book_id) REFERENCES books(book_id) ON DELETE CASCADE,
+    CONSTRAINT fk_author FOREIGN KEY(author_id) REFERENCES authors(author_id) ON DELETE CASCADE
+);
+]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ /usr/local/bin/python /workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py
+/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py:66: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  result_dataFrame = pd.read_sql("SELECT * FROM publishers;", con=engine)
+Traceback (most recent call last):
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 66, in <module>
+    result_dataFrame = pd.read_sql("SELECT * FROM publishers;", con=engine)
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 706, in read_sql
+    return pandas_sql.read_query(
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 2738, in read_query
+    cursor = self.execute(sql, params)
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 2672, in execute
+    cur = self.con.cursor()
+AttributeError: 'Engine' object has no attribute 'cursor'
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ /usr/local/bin/python /workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py
+/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py:66: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  result_dataFrame = pd.read_sql("SELECT * FROM publishers;", con=engine)
+Traceback (most recent call last):
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 66, in <module>
+    result_dataFrame = pd.read_sql("SELECT * FROM publishers;", con=engine)
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 706, in read_sql
+    return pandas_sql.read_query(
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 2738, in read_query
+    cursor = self.execute(sql, params)
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 2672, in execute
+    cur = self.con.cursor()
+AttributeError: 'OptionEngine' object has no attribute 'cursor'
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ psql -h localhost -U gitpod -d sample-db
+psql (13.15 (Debian 13.15-0+deb11u1), server 14.12)
+WARNING: psql major version 13, server major version 14.
+         Some psql features might not work.
+Type "help" for help.
+
+sample-db=# DROP TABLE IF EXISTS book_authors CASCADE;
+DROP TABLE IF EXISTS books CASCADE;
+DROP TABLE IF EXISTS authors CASCADE;
+DROP TABLE IF EXISTS publishers CASCADE;
+DROP TABLE
+DROP TABLE
+DROP TABLE
+DROP TABLE
+sample-db=# \q
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ /usr/local/bin/python /workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py
+/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py:66: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  result_dataFrame = pd.read_sql("SELECT * FROM publishers;", con=engine)
+Traceback (most recent call last):
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/app.py", line 66, in <module>
+    result_dataFrame = pd.read_sql("SELECT * FROM publishers;", con=engine)
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 706, in read_sql
+    return pandas_sql.read_query(
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 2738, in read_query
+    cursor = self.execute(sql, params)
+  File "/usr/local/lib/python3.10/site-packages/pandas/io/sql.py", line 2672, in execute
+    cur = self.con.cursor()
+AttributeError: 'OptionEngine' object has no attribute 'cursor'
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ /usr/local/bin/python /workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/solution.py
+Traceback (most recent call last):
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.DuplicateTable: relation "publishers" already exists
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspaces/Ale-connecting-to-a-sql-database-project-tutorial/src/solution.py", line 14, in <module>
+    engine.execute("""
+  File "<string>", line 2, in execute
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/util/deprecations.py", line 401, in warned
+    return fn(*args, **kwargs)
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3176, in execute
+    return connection.execute(statement, *multiparams, **params)
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1291, in execute
+    return self._exec_driver_sql(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1595, in _exec_driver_sql
+    ret = self._execute_context(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1862, in _execute_context
+    self._handle_dbapi_exception(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2043, in _handle_dbapi_exception
+    util.raise_(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 208, in raise_
+    raise exception
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1819, in _execute_context
+    self.dialect.do_execute(
+  File "/root/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.DuplicateTable) relation "publishers" already exists
+
+[SQL: 
+CREATE TABLE publishers(
+    publisher_id INT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    PRIMARY KEY(publisher_id)
+);
+
+CREATE TABLE authors(
+    author_id INT NOT NULL,
+    first_name VARCHAR(100) NOT NULL,
+    middle_name VARCHAR(50) NULL,
+    last_name VARCHAR(100) NULL,
+    PRIMARY KEY(author_id)
+);
+
+CREATE TABLE books(
+    book_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    total_pages INT NULL,
+    rating DECIMAL(4, 2) NULL,
+    isbn VARCHAR(13) NULL,
+    published_date DATE,
+    publisher_id INT NULL,
+    PRIMARY KEY(book_id),
+    CONSTRAINT fk_publisher FOREIGN KEY(publisher_id) REFERENCES publishers(publisher_id)
+);
+
+CREATE TABLE book_authors (
+    book_id INT NOT NULL,
+    author_id INT NOT NULL,
+    PRIMARY KEY(book_id, author_id),
+    CONSTRAINT fk_book FOREIGN KEY(book_id) REFERENCES books(book_id) ON DELETE CASCADE,
+    CONSTRAINT fk_author FOREIGN KEY(author_id) REFERENCES authors(author_id) ON DELETE CASCADE
+);
+]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+@AleOfDurin ➜ /workspaces/Ale-connecting-to-a-sql-database-project-tutorial (main) $ 
